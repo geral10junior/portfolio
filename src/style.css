@@ -2,7 +2,7 @@
 
 @utility container {
   margin: 0 auto;
-  padding: 0 0.5rem;
+  padding: 0 2rem;
   @media (width >= 40rem) {
     padding: 0 6rem;
   }
