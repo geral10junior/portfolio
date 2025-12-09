@@ -5,7 +5,7 @@ interface DashedBoxProps {
 
 export const DashedBox = ({ children, className = "" }: DashedBoxProps) => {
   return (
-    <div className={`relative inline-block group ${className}`}>
+    <div className={`relative flex group ${className}`}>
       <svg className="absolute inset-0 w-full h-full pointer-events-none overflow-visible">
         <rect
           x="1"
