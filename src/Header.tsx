@@ -6,10 +6,10 @@ export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
   return (
-    <header className="fixed top-0 left-0 w-full z-10 py-8">
+    <header className="fixed top-0 left-0 w-full z-10 py-8 bg-neutral-900">
       <div className="container flex items-center justify-between">
         <a href="./" className="relative z-0">
-          <img src={Logo} width="64" height="62" alt="Logo" />
+          <img src={Logo} width="64" height="62" alt="Logo - Lupa" />
         </a>
 
         <nav
@@ -21,7 +21,7 @@ export const Header = () => {
           {isMenuOpen && (
             <div
               onClick={() => setIsMenuOpen(false)}
-              className="fixed z-40 inset-0 bg-neutral-950/40 backdrop-blur-md lg:hidden"
+              className="fixed z-40 inset-0 bg-neutral-950/70 backdrop-blur-md lg:hidden"
             ></div>
           )}
 
