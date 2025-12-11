@@ -6,7 +6,7 @@ export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
   return (
-    <header className="fixed top-0 left-0 w-full z-10 py-8 bg-neutral-900">
+    <header className="fixed top-0 left-0 w-full z-20 py-8 bg-neutral-900">
       <div className="container flex items-center justify-between">
         <a href="./" className="relative z-0">
           <img src={Logo} width="64" height="62" alt="Logo - Lupa" />

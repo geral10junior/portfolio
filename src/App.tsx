@@ -1,4 +1,5 @@
 import AboutMe from "./AboutMe.tsx";
+import Contact from "./Contact.tsx";
 import Home from "./Home.tsx";
 import Projects from "./Projects.tsx";
 
@@ -8,6 +9,7 @@ export const App = () => {
       <Home />
       <AboutMe />
       <Projects />
+      <Contact />
     </>
   );
 };
