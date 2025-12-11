@@ -95,7 +95,7 @@ const ContactForm = () => {
         value={form.title}
         onChange={handleChange}
         error={errors.title}
-        placeholder="Motivo do contato"
+        placeholder="Título do assunto"
       />
 
       <TextArea
