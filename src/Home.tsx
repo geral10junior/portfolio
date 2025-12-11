@@ -10,13 +10,13 @@ export const Home = () => {
       <div id="home" className="container mt-[180px] flex justify-center">
         <div className="max-w-[1349px] relative flex ">
           <img
-            className="max-w-[281px] max-lg:hidden absolute xl:-left-80 -left-50  bottom-40"
+            className="animaLeft max-w-[281px] max-lg:hidden absolute xl:-left-80 -left-50  bottom-40"
             src={leftHand}
             alt=""
           />
-          <img src={MainPhoto} alt="" />
+          <img className="animaBottom" src={MainPhoto} alt="" />
           <img
-            className="max-w-[281px] max-lg:hidden absolute xl:-right-80 -right-50  bottom-40"
+            className="animaRight max-w-[281px] max-lg:hidden absolute xl:-right-80 -right-50  bottom-40"
             src={RightHand}
             alt=""
           />
