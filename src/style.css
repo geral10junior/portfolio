@@ -7,3 +7,10 @@
     padding: 0 6rem;
   }
 }
+@utility container-range {
+  margin: 0 auto;
+  padding: 0;
+  @media (width >= 40rem) {
+    padding: 0;
+  }
+}

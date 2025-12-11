@@ -7,8 +7,8 @@ export const Home = () => {
   return (
     <div>
       <Header />
-      <div className="container mt-[180px] flex justify-center">
-        <div className="max-w-[1349px] relative flex">
+      <div id="home" className="container mt-[180px] flex justify-center">
+        <div className="max-w-[1349px] relative flex ">
           <img
             className="max-w-[281px] max-lg:hidden absolute xl:-left-80 -left-50  bottom-40"
             src={leftHand}

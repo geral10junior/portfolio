@@ -6,9 +6,12 @@ import DownloadPDF from "./DownloadPDF";
 const AboutMe = () => {
   return (
     <div>
-      <img className="mt-24" src={Range} alt="" />
+      <img className="container-range mt-24" src={Range} alt="" />
       <div className="container flex max-lg:flex-col gap-28 mt-20 lg:32">
-        <div className="text-gray-200 max-w-[800px] flex flex-col justify-center gap-8 lg:gap-12">
+        <div
+          id="sobre"
+          className="text-gray-200 max-w-[800px] flex flex-col justify-center gap-8 lg:gap-12"
+        >
           <h1 className="whitespace-nowrap lg:text-7xl text-5xl font-mono text-center">
             Sobre mim
           </h1>
