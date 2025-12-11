@@ -39,7 +39,7 @@ const Contact = () => {
     >
       <ContactForm />
       <div className="flex pl-7 flex-col font-sans gap-8">
-        <h1 className="text-neutral-200 text-2xl font-bold text-balance max-w-[528px]">
+        <h1 className="lg:pt-4 text-neutral-200 text-2xl font-bold text-balance max-w-[528px]">
           Estou disponível para novos projetos no momento. Entre em contato
           comigo e marcamos uma conversa.
         </h1>
