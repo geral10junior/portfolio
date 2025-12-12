@@ -38,7 +38,7 @@ const Contact = () => {
       className="container grid grid-cols-1 lg:grid-cols-2 text-gray-400 lg:gap-8 gap-24"
     >
       <ContactForm />
-      <div className="flex pl-7 flex-col font-sans gap-8">
+      <div className="flex lg:pl-7 flex-col font-sans gap-8">
         <h1 className="lg:pt-4 text-neutral-200 text-2xl font-bold text-balance max-w-[528px]">
           Estou disponível para novos projetos no momento. Entre em contato
           comigo e marcamos uma conversa.
