@@ -1,4 +1,3 @@
-import React from "react";
 import Range from "./img/range-1.svg";
 import CvImage from "./img/cv.svg";
 import DownloadPDF from "./DownloadPDF";
