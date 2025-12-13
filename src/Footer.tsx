@@ -1,4 +1,3 @@
-import React from "react";
 import Range from "./img/range-2.svg";
 
 const Footer = () => {

@@ -101,7 +101,7 @@ const ContactForm = () => {
         import.meta.env.VITE_EMAILJS_PUBLIC_KEY
       )
       .then(
-        (response) => {
+        () => {
           setStatus("success");
           localStorage.setItem("lastEmailSent", Date.now().toString());
 
@@ -113,7 +113,7 @@ const ContactForm = () => {
           });
         },
         (error) => {
-          setStatus("error");
+          setStatus(error);
         }
       );
   };

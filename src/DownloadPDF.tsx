@@ -1,4 +1,3 @@
-import React from "react";
 import { DashedBox } from "./DashedBox";
 import DownloadIcon from "./img/download.svg";
 import CurriculoFile from "./img/Curriculo.pdf";

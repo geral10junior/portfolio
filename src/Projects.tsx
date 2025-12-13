@@ -1,4 +1,3 @@
-import React from "react";
 import Slide from "./Projects/Slide";
 
 const Projects = () => {
