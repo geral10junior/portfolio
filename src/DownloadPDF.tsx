@@ -7,7 +7,7 @@ const DownloadPDF = () => {
     <div className="mx-auto w-fit">
       <DashedBox className="flex">
         <a
-          className="flex gap-2 items-center font-mono"
+          className="flex gap-2 items-center font-mono py-3 px-6"
           download="Geraldez_Ribeiro_CV.pdf"
           href={CurriculoFile}
         >

@@ -63,24 +63,36 @@ export const Header = () => {
               </a>
             </li>
             <DashedBox className="max-lg:hidden">
-              <a href="#home" className="text-white font-mono text-lg px-2">
+              <a
+                href="#home"
+                className="text-white font-mono text-lg block py-3 px-6"
+              >
                 Home
               </a>
             </DashedBox>
 
             <DashedBox className="max-lg:hidden">
-              <a href="#sobre" className="text-white font-mono text-lg px-2">
+              <a
+                href="#sobre"
+                className="text-white font-mono text-lg block py-3 px-6"
+              >
                 Sobre
               </a>
             </DashedBox>
             <DashedBox className="max-lg:hidden">
-              <a href="#projetos" className="text-white font-mono text-lg px-2">
+              <a
+                href="#projetos"
+                className="text-white font-mono text-lg block py-3 px-6"
+              >
                 Projetos
               </a>
             </DashedBox>
 
             <DashedBox className="max-lg:hidden">
-              <a href="#contato" className="text-white font-mono text-lg px-2">
+              <a
+                href="#contato"
+                className="text-white font-mono text-lg block py-3 px-6"
+              >
                 Contato
               </a>
             </DashedBox>

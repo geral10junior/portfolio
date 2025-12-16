@@ -3,7 +3,7 @@ import emailjs from "@emailjs/browser";
 import Input from "./Input";
 import TextArea from "./TextArea";
 
-const COOLDOWN_TIME = 30 * 60 * 1000;
+const COOLDOWN_TIME = 30 * 60 * 1000; // 30 minutos
 
 const ContactForm = () => {
   const [form, setForm] = useState({
@@ -26,6 +26,7 @@ const ContactForm = () => {
 
   const [timeRemaining, setTimeRemaining] = useState<number>(0);
 
+  // Efeito para checar o bloqueio ao carregar a página (F5)
   useEffect(() => {
     const lastSent = localStorage.getItem("lastEmailSent");
 
@@ -102,8 +103,9 @@ const ContactForm = () => {
       )
       .then(
         () => {
+          const now = Date.now();
           setStatus("success");
-          localStorage.setItem("lastEmailSent", Date.now().toString());
+          localStorage.setItem("lastEmailSent", now.toString());
 
           setForm({
             name: "",
@@ -111,9 +113,34 @@ const ContactForm = () => {
             title: "",
             message: "",
           });
+
+          // --- MUDANÇA AQUI ---
+          // Espera 5 segundos exibindo "Sucesso" e depois muda para o contador
+          setTimeout(() => {
+            // Calcula quanto tempo já passou (aprox. 5000ms)
+            const timePassed = Date.now() - now;
+            const remaining = COOLDOWN_TIME - timePassed;
+
+            setStatus("blocked");
+            setTimeRemaining(remaining);
+
+            // Inicia o intervalo do contador regressivo
+            const timer = setInterval(() => {
+              setTimeRemaining((prev) => {
+                if (prev <= 1000) {
+                  clearInterval(timer);
+                  setStatus("idle");
+                  localStorage.removeItem("lastEmailSent");
+                  return 0;
+                }
+                return prev - 1000;
+              });
+            }, 1000);
+          }, 5000); // 5 segundos de delay
         },
         (error) => {
-          setStatus(error);
+          setStatus("error");
+          console.error(error); // Bom para debug
         }
       );
   };
@@ -190,9 +217,10 @@ const ContactForm = () => {
         {status === "idle" || status === "error" ? "Enviar Mensagem" : ""}
       </button>
 
+      {/* Mensagem de sucesso visível apenas durante os 5 segundos */}
       {status === "success" && (
-        <p className="text-green-500 text-center mt-2 font-medium">
-          Mensagem enviada! Para evitar spam, aguarde antes de enviar outra.
+        <p className="text-green-500 text-center mt-2 font-medium animate-pulse">
+          Mensagem enviada com sucesso!
         </p>
       )}
 
@@ -204,8 +232,8 @@ const ContactForm = () => {
 
       {status === "blocked" && (
         <p className="text-orange-400 text-center mt-2 text-sm">
-          Você já enviou uma mensagem recentemente. Por favor, aguarde para
-          enviar outra.
+          Você já enviou uma mensagem recentemente. Por favor, aguarde o tempo
+          no botão.
         </p>
       )}
     </form>

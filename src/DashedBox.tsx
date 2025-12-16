@@ -23,7 +23,7 @@ export const DashedBox = ({ children, className = "" }: DashedBoxProps) => {
         />
       </svg>
 
-      <div className="relative z-10 px-6 py-2 hover:stroke-red-600">
+      <div className="relative z-10  hover:stroke-red-600 block">
         {children}
       </div>
     </div>
