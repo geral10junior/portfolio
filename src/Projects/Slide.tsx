@@ -75,7 +75,7 @@ const Slide = () => {
     >
       <Carousel
         setApi={setCarouselApi}
-        className="w-full max-w-[1600px]"
+        className="w-full max-w-[1600px] cursor-grab active:cursor-grabbing"
         opts={{ align: "center", loop: true }}
       >
         <CarouselContent className="h-[450px] sm:h-[600px] md:h-[500px] lg:h-[600px] items-center py-8">
