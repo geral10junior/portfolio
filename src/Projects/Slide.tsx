@@ -1,5 +1,12 @@
 import React from "react";
 import { motion } from "framer-motion";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  type CarouselApi,
+} from "@/components/ui/carousel";
+
 import Bikcraft from "../img/projects/bikcraft.svg";
 import Move from "../img/projects/move.svg";
 import Dogs from "../img/projects/dogs.svg";
@@ -8,34 +15,47 @@ import Forest from "../img/projects/forest.svg";
 import WorldCup from "../img/projects/world-cup.svg";
 
 const Slide = () => {
-  const [positionIndexes, setPositionIndexes] = React.useState([
-    0, 1, 2, 3, 4, 5,
-  ]);
+  const [carouselApi, setCarouselApi] = React.useState<CarouselApi | null>(
+    null
+  );
+  const [selectedIndex, setSelectedIndex] = React.useState(0);
+  const [isDragging, setIsDragging] = React.useState(false);
 
   const handleNext = () => {
-    setPositionIndexes((prevIndexes) => {
-      const updatedIndexes = prevIndexes.map(
-        (prevIndex) => (prevIndex + 1) % 6
-      );
-      return updatedIndexes;
-    });
+    carouselApi?.scrollNext();
   };
 
   const handlePrevious = () => {
-    setPositionIndexes((prevIndexes) => {
-      const updatedIndexes = prevIndexes.map(
-        (prevIndex) => (prevIndex + 5) % 6
-      );
-      return updatedIndexes;
-    });
+    carouselApi?.scrollPrev();
   };
-  const handleImageClick = (index: number, link: string) => {
-    const currentPosition = positions[positionIndexes[index]];
 
-    if (link && currentPosition === "center") {
+  React.useEffect(() => {
+    if (!carouselApi) return;
+    const onSelect = () => setSelectedIndex(carouselApi.selectedScrollSnap());
+    const onDragStart = () => setIsDragging(true);
+    const onDragEnd = () => setIsDragging(false);
+
+    onSelect();
+    carouselApi.on("select", onSelect);
+    (carouselApi as any).on("dragStart", onDragStart);
+    (carouselApi as any).on("dragEnd", onDragEnd);
+
+    return () => {
+      carouselApi.off("select", onSelect);
+      (carouselApi as any).off("dragStart", onDragStart);
+      (carouselApi as any).off("dragEnd", onDragEnd);
+    };
+  }, [carouselApi]);
+
+  const handleImageClick = (index: number, link: string) => {
+    if (isDragging) return;
+    if (link && index === selectedIndex) {
       window.open(link, "_blank");
+    } else {
+      carouselApi?.scrollTo(index);
     }
   };
+
   const images = [
     { photo: Bikcraft, link: "https://geral10junior.github.io/bikCraft/" },
     {
@@ -48,56 +68,78 @@ const Slide = () => {
     { photo: Forest, link: "https://forest-coral.vercel.app/" },
   ];
 
-  const positions = ["center", "left1", "left2", "back", "right2", "right1"];
-
-  const imageVariants = {
-    center: { x: "0%", scale: 1, zIndex: 5, opacity: 1 },
-    left1: { x: "-60%", scale: 0.7, zIndex: 3, opacity: 1 },
-    left2: { x: "-100%", scale: 0.5, zIndex: 2, opacity: 0.8 },
-    back: { x: "0%", scale: 0.2, zIndex: 1, opacity: 0 },
-    right2: { x: "100%", scale: 0.5, zIndex: 2, opacity: 0.8 },
-    right1: { x: "60%", scale: 0.7, zIndex: 3, opacity: 1 },
-  };
-
   return (
     <div
       id="projetos"
-      className="container mx-auto flex flex-col items-center justify-center min-h-screen py-20 bg-neutral-900 overflow-hidden"
+      className="container mx-auto flex flex-col items-center justify-center min-h-screen py-6 md:py-12 bg-neutral-900 overflow-hidden"
     >
-      <div className="relative w-full flex justify-center items-center h-[250px] sm:h-[350px] md:h-[450px] lg:h-[500px]">
-        {images.map((image, index) => {
-          const isCenter = positions[positionIndexes[index]] === "center";
-          return (
-            <motion.img
-              key={index}
-              src={image.photo}
-              alt={`Slide ${index}`}
-              onClick={() => handleImageClick(index, image.link)}
-              className={`rounded-sm border-2 shadow-2xl absolute 
-                       w-[70%] sm:w-[50%] md:w-[50%] lg:w-[30%] ${
-                         isCenter && image.link
-                           ? "cursor-pointer hover:border-dashed hover:border-red-600"
-                           : "cursor-default"
-                       }`}
-              initial="center"
-              animate={positions[positionIndexes[index]]}
-              variants={imageVariants}
-              transition={{ duration: 0.5 }}
-            />
-          );
-        })}
-      </div>
+      <Carousel
+        setApi={setCarouselApi}
+        className="w-full max-w-[1600px]"
+        opts={{ align: "center", loop: true }}
+      >
+        <CarouselContent className="h-[450px] sm:h-[600px] md:h-[500px] lg:h-[600px] items-center py-8">
+          {images.map((image, index) => {
+            const isCenter = index === selectedIndex;
+            return (
+              <CarouselItem
+                key={index}
+                className="basis-[75%] sm:basis-[60%] md:basis-[45%] lg:basis-[33.333%]"
+              >
+                <div className="relative flex justify-center items-center h-full px-2 sm:px-4">
+                  <motion.img
+                    src={image.photo}
+                    alt={`Slide ${index}`}
+                    onClick={() => handleImageClick(index, image.link)}
+                    initial={false}
+                    animate={
+                      isCenter
+                        ? {
+                            scale: 1,
+                            zIndex: 50,
+                            opacity: 1,
+                            filter: "grayscale(0%)",
+                          }
+                        : {
+                            scale: 0.7,
+                            zIndex: 10,
+                            opacity: 0.4,
+                            filter: "grayscale(100%)",
+                          }
+                    }
+                    transition={{ duration: 0.4, ease: "easeOut" }}
+                    className={`
+                      rounded-xl border-2 shadow-2xl object-contain
+                      w-full h-auto
+                      max-w-[260px] sm:max-w-[400px] md:max-w-[550px] lg:max-w-[700px]
+                      ${
+                        isCenter
+                          ? "cursor-pointer border-red-600 hover:border-dashed"
+                          : "cursor-default border-transparent"
+                      }
+                    `}
+                    style={{
+                      pointerEvents: isDragging ? "none" : "auto",
+                      maxHeight: "100%",
+                    }}
+                  />
+                </div>
+              </CarouselItem>
+            );
+          })}
+        </CarouselContent>
+      </Carousel>
 
-      <div className="flex gap-4 justify-center mt-40 sm:mt-16 md:mt-4 lg:mt-12 w-full z-10">
+      <div className="flex gap-3 sm:gap-4 justify-center mt-4 sm:mt-8 w-full z-10">
         <button
           onClick={handlePrevious}
-          className="cursor-pointer text-neutral-200 px-6 py-3 bg-neutral-800 rounded-md border-transparent border-2 hover:border-dashed hover:border-red-600 transition-all font-semibold uppercase text-sm tracking-wider shadow-lg"
+          className="cursor-pointer text-neutral-200 px-8 py-3 bg-neutral-800 rounded-lg border-dashed border-2 border-transparent hover:border-red-600 hover:text-white transition-all font-bold uppercase text-xs sm:text-sm tracking-widest shadow-lg flex items-center gap-2"
         >
           <span>←</span> Anterior
         </button>
         <button
           onClick={handleNext}
-          className="cursor-pointer text-neutral-200 px-6 py-3 bg-neutral-800 rounded-md border-transparent border-2 hover:border-dashed hover:border-red-600 transition-all font-semibold uppercase text-sm tracking-wider shadow-lg"
+          className="cursor-pointer text-neutral-200 px-8 py-3 bg-neutral-800 rounded-lg border-dashed border-2 border-transparent hover:border-red-600 hover:text-white transition-all font-bold uppercase text-xs sm:text-sm tracking-widest shadow-lg flex items-center gap-2"
         >
           Próximo <span>→</span>
         </button>

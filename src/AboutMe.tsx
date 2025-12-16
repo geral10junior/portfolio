@@ -35,7 +35,7 @@ const AboutMe = () => {
           </p>
           <DownloadPDF />
         </div>
-        <div className="flex lg:min-w-[400px] max-lg:justify-center justify-end">
+        <div className="flex lg:min-w-[400px] max-lg:justify-center justify-end rounded-xl overflow-hidden">
           <img src={CvImage} alt="Currículo" />
         </div>
       </div>
