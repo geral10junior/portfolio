@@ -8,7 +8,7 @@ const DownloadPDF = () => {
       <DashedBox className="flex">
         <a
           className="flex gap-2 items-center font-mono py-3 px-6"
-          download="GeraldezCV.pdf"
+          download="GeraldezRibeiro_CV.pdf"
           href={CV}
         >
           Baixar CV <img src={DownloadIcon} alt="" />
