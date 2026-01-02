@@ -14,7 +14,7 @@ const AboutMe = () => {
           <h1 className="whitespace-nowrap lg:text-7xl text-5xl font-mono text-center">
             Sobre mim
           </h1>
-          <p className="text-center max-xl:text-[16px] max-w-[800px]  text-neutral-400 font-sans">
+          <p className="text-center max-xl:text-[16px] text-lg max-w-[800px]  text-neutral-400 font-sans">
             Me chamo <strong> Geraldez Ribeiro</strong>, acadêmico de
             <strong> Ciência da Computação</strong> na Universidade Estadual da
             Paraíba ( <strong>UEPB</strong>). Minha jornada na tecnologia é

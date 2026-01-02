@@ -1,6 +1,6 @@
 import { DashedBox } from "./DashedBox";
 import DownloadIcon from "./img/download.svg";
-import CurriculoFile from "./img/Curriculo.pdf";
+import CurriculoFile from "./img/GeraldezRibeiro_CV.pdf";
 
 const DownloadPDF = () => {
   return (
@@ -8,7 +8,7 @@ const DownloadPDF = () => {
       <DashedBox className="flex">
         <a
           className="flex gap-2 items-center font-mono py-3 px-6"
-          download="Geraldez_Ribeiro_CV.pdf"
+          download="GeraldezRibeiro_CV.pdf"
           href={CurriculoFile}
         >
           Baixar CV <img src={DownloadIcon} alt="" />
